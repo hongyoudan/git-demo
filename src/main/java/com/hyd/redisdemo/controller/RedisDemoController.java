@@ -26,46 +26,46 @@ public class RedisDemoController {
 
     @GetMapping("/stringTest")
     public String stringTest() {
-        this.redisTemplate.delete("name");
-        this.redisTemplate.opsForValue().set("name", "路人");
-        String name = this.redisTemplate.opsForValue().get("name");
+        redisTemplate.delete("name");
+        redisTemplate.opsForValue().set("name", "路人");
+        String name = redisTemplate.opsForValue().get("name");
         return name;
     }
 
     @GetMapping("/listTest")
     public List<String> listTest() {
-        this.redisTemplate.delete("names");
-        this.redisTemplate.opsForList().rightPushAll("names", "刘德华", "张学友", "郭富城", "黎明");
-        List<String> courses = this.redisTemplate.opsForList().range("names", 0, -1);
+        redisTemplate.delete("names");
+        redisTemplate.opsForList().rightPushAll("names", "刘德华", "张学友", "郭富城", "黎明");
+        List<String> courses = redisTemplate.opsForList().range("names", 0, -1);
         return courses;
     }
 
     @GetMapping("setTest")
     public Set<String> setTest() {
-        this.redisTemplate.delete("courses");
-        this.redisTemplate.opsForSet().add("courses", "java", "spring", "springboot");
-        Set<String> courses = this.redisTemplate.opsForSet().members("courses");
+        redisTemplate.delete("courses");
+        redisTemplate.opsForSet().add("courses", "java", "spring", "springboot");
+        Set<String> courses = redisTemplate.opsForSet().members("courses");
         return courses;
     }
 
     @GetMapping("hashTest")
     public Map<Object, Object> hashTest() {
-        this.redisTemplate.delete("userMap");
+        redisTemplate.delete("userMap");
         Map<String, String> map = new HashMap<>();
         map.put("name", "路人");
         map.put("age", "30");
-        this.redisTemplate.opsForHash().putAll("userMap", map);
-        Map<Object, Object> userMap = this.redisTemplate.opsForHash().entries("userMap");
+        redisTemplate.opsForHash().putAll("userMap", map);
+        Map<Object, Object> userMap = redisTemplate.opsForHash().entries("userMap");
         return userMap;
     }
 
     @GetMapping("zsetTest")
     public Set<String> zsetTest() {
-        this.redisTemplate.delete("languages");
-        this.redisTemplate.opsForZSet().add("languages", "java", 100d);
-        this.redisTemplate.opsForZSet().add("languages", "c", 95d);
-        this.redisTemplate.opsForZSet().add("languages", "php", 70);
-        Set<String> languages = this.redisTemplate.opsForZSet().range("languages", 0, -1);
+        redisTemplate.delete("languages");
+        redisTemplate.opsForZSet().add("languages", "java", 100d);
+        redisTemplate.opsForZSet().add("languages", "c", 95d);
+        redisTemplate.opsForZSet().add("languages", "php", 70);
+        Set<String> languages = redisTemplate.opsForZSet().range("languages", 0, -1);
         return languages;
     }
 }
